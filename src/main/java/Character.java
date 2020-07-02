@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -7,6 +8,12 @@ import java.util.List;
  * each containing beads
  * <p>
  * I'm using the names of pools taken from the PDF describing the game
+ * <p>
+ * TODO: Add a boolean function to signify when somoene is out of the fight (and test it)
+ * <p>
+ * TODO: test the refresh function
+ * <p>
+ * TODO: write takeSinglePointOfDamage and test takeDamage
  */
 public class Character {
 
@@ -30,16 +37,56 @@ public class Character {
   private final String name;
 
   /**
-   * Define a new character by name and number of beads they have.
+   * Define a new character by name and number of beads they have. This just calls the other
+   * constructir and is really jsut to make writign tests easier
    *
    * @param name  call them this
    * @param beads their beads
    */
   public Character(String name, BeadColor... beads) {
+    this(name, Arrays.asList(beads));
+  }
+
+  /**
+   * Define a new character by name and number of beads they have.
+   *
+   * @param name  call them this
+   * @param beads their beads
+   */
+  public Character(String name, Collection<BeadColor> beads) {
     this.name = name;
     for (BeadColor bead : beads) {
       ready.add(bead);
     }
+  }
+
+
+  /**
+   * Take some damage
+   *
+   * @param hits the number of beads damage to take
+   */
+  public void takeDamage(int hits) {
+
+    // We can just repeat taking one point of damage at a time
+    for (int i = 0; i < hits; i++) {
+      takeSinglePointOfDamage();
+    }
+  }
+
+  private void takeSinglePointOfDamage() {
+    /*
+        When an action damages an opponent, they must move a bead to the exhausted pool.
+        This must be taken from the active pool if possible, then the ready pool.
+        And if both those are empty, from the spent pool. If all these pools are empty
+        a bead is moved from the exhausted pool to the injury pool.
+    */
+
+    // If the active pool is not empty, move a random bead from it to exhausted
+    // Otherwise try from the ready pool
+    // Otherwise try from the spent pool
+    // Otherwise move a random bead from exhausted to injured
+    // if all beads are in injured pool I guess do nothing as the chaarcetr is already out of it
   }
 
 
@@ -61,11 +108,30 @@ public class Character {
     return ready.size() > 0;
   }
 
+  /**
+   * Move beads from the ready pool to the action pool. Thsi calls the other prepare methdo and is
+   * just to make testing easier
+   *
+   * @param beads items to prepare
+   */
+  public void prepare(BeadColor... beads) {
+    prepare(Arrays.asList(beads));
+  }
 
+
+  /**
+   * Move beads from the ready pool to the action pool
+   *
+   * @param beads items to prepare
+   */
   public void prepare(Collection<BeadColor> beads) {
 
     if (!canPrepare()) {
-      throw new IllegalStateException("Don't ask a characetr who cannot prepare to prepare");
+      throw new IllegalStateException("Don't ask a character who cannot prepare to prepare");
+    }
+
+    if (canAct()) {
+      throw new IllegalStateException("This character is already prepared");
     }
 
     // First we remove the beads from the ready pool
@@ -98,7 +164,7 @@ public class Character {
    */
   public int getSpeed() {
     if (!canAct()) {
-      throw new IllegalStateException("Don't ask for the speed of seomeone who cannot act");
+      throw new IllegalStateException("Don't ask for the speed of someone who cannot act");
     }
 
     int speed = 0;
@@ -113,6 +179,19 @@ public class Character {
 
   @Override
   public String toString() {
-    return name;
+    return name + "{" + describe(action) + "|" + describe(ready) + "|" + describe(spent)
+        + "|" + describe(exhausted) + "|" + describe(injury) + "}";
+  }
+
+  private String describe(List<BeadColor> pool) {
+    if (pool.isEmpty()) {
+      return "-";
+    }
+
+    String result = "";
+    for (BeadColor bead : pool) {
+      result = result + bead.shortName();
+    }
+    return result;
   }
 }
