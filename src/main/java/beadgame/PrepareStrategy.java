@@ -20,7 +20,7 @@ public class PrepareStrategy {
    *
    * @param preferenceDefinition dash separated list of bead combinations
    * @return the strategy
-   *
+   * <p>
    * TODO: Test all this
    */
   public static PrepareStrategy makeStrategy(String preferenceDefinition) {
@@ -77,7 +77,7 @@ public class PrepareStrategy {
     // if we can remove all beads from this copy we are goof to use this combo
     List<BeadColor> copy = new ArrayList<>(pool);
     for (BeadColor bead : beads) {
-      boolean success = pool.remove(bead);
+      boolean success = copy.remove(bead);
       if (!success) {
         return false;
       }

@@ -93,7 +93,7 @@ public class Actor {
 
 
   /**
-   * A character can prepare if they have any beads in their action pool
+   * A character can prepare if they h*=*ave any beads in their action pool
    *
    * @return true if they can act
    */
