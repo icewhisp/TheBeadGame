@@ -1,3 +1,5 @@
+package beadgame;
+
 public enum BeadColor {
   black("Force"), blue("Intelligence"), green("Speed"), white("Ancestry");
 

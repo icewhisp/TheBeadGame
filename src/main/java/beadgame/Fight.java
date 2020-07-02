@@ -1,3 +1,5 @@
+package beadgame;
+
 /**
  * Simulates a fight between two pools
  *

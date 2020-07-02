@@ -1,3 +1,5 @@
+package beadgame;
+
 public enum BeadState {
   in_pool, spent, exhausted, wounded;
 

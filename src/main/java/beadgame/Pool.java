@@ -1,3 +1,5 @@
+package beadgame;
+
 /**
  * This class is a collection of beads and the basic operators you'd perform on them
  *
@@ -13,7 +15,7 @@ public class Pool {
   private final int TARGET_NUMBER = 3;
 
   /**
-   * Constructor for objects of class Pool beads is used to create the colors and the plan is when
+   * Constructor for objects of class beadgame.Pool beads is used to create the colors and the plan is when
    * to use the beads
    */
   public Pool(BeadColor[] colors, int[] plan) {

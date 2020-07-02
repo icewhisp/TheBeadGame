@@ -1,3 +1,5 @@
+package beadgame;
+
 /**
  * The bead class is used to represent the different stats and pools a character has
  *
@@ -12,7 +14,7 @@ public class Bead {
   private BeadState state = BeadState.in_pool;
 
   /**
-   * Constructor for objects of class Bead
+   * Constructor for objects of class beadgame.Bead
    */
   public Bead(BeadColor color, int use) {
     // initialise instance variables

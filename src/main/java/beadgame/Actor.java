@@ -1,3 +1,5 @@
+package beadgame;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,7 +17,7 @@ import java.util.List;
  * <p>
  * TODO: write takeSinglePointOfDamage and test takeDamage
  */
-public class Character {
+public class Actor {
 
   /* The action pool that contains the effort you are committing to an action right now */
   private final List<BeadColor> action = new ArrayList<>();
@@ -43,7 +45,7 @@ public class Character {
    * @param name  call them this
    * @param beads their beads
    */
-  public Character(String name, BeadColor... beads) {
+  public Actor(String name, BeadColor... beads) {
     this(name, Arrays.asList(beads));
   }
 
@@ -53,7 +55,7 @@ public class Character {
    * @param name  call them this
    * @param beads their beads
    */
-  public Character(String name, Collection<BeadColor> beads) {
+  public Actor(String name, Collection<BeadColor> beads) {
     this.name = name;
     for (BeadColor bead : beads) {
       ready.add(bead);
@@ -193,5 +195,9 @@ public class Character {
       result = result + bead.shortName();
     }
     return result;
+  }
+
+  public List<BeadColor> readyPool() {
+    return ready;
   }
 }

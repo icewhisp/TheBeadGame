@@ -1,3 +1,5 @@
+package beadgame;
+
 /**
  * Write a description of class run here.
  *

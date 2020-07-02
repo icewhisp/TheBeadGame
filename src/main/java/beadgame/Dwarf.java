@@ -1,3 +1,5 @@
+package beadgame;
+
 /**
  * A subsect of fighter designed to simulate the racial boon of a dwarf
  *
