@@ -1,7 +1,7 @@
 public enum BeadState {
   in_pool, spent, exhausted, wounded;
 
-  public BeadState nextWorse() {
+  public BeadState becomeDamaged() {
     switch (this) {
       case in_pool:
         return spent;

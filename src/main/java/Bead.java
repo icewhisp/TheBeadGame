@@ -22,7 +22,7 @@ public class Bead {
 
   public void takeDamage() //Used when a bead takes damage
   {
-    state = state.nextWorse();
+    state = state.becomeDamaged();
   }
 
   /**
@@ -33,7 +33,8 @@ public class Bead {
       return state == BeadState.in_pool;
   }
 
-  public void refresh() //If a bead is just spent then it returns to the in pool state
+  //If a bead is just spent then it returns to the in pool state
+  public void refresh()
   {
     if (state == BeadState.spent) {
       state = BeadState.in_pool;

@@ -7,7 +7,7 @@
 public class Pool {
 
   public int turn = 1;
-  // instance variables - replace the example below with your own
+
   private final Bead[] beadPool;
   private final int DICE_FACE = 6;
   private final int TARGET_NUMBER = 3;
