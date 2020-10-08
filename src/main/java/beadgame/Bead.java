@@ -22,8 +22,8 @@ public class Bead {
     this.use = use;
   }
 
-  public void takeDamage() //Used when a bead takes damage
-  {
+  // Used when a bead takes damage
+  public void takeDamage() {
     state = state.becomeDamaged();
   }
 
@@ -32,24 +32,23 @@ public class Bead {
    * for use when choosing what beads you want to use
    */
   public boolean isUseable() {
-      return state == BeadState.in_pool;
+    return state == BeadState.in_pool;
   }
 
   //If a bead is just spent then it returns to the in pool state
-  public void refresh()
-  {
+  public void refresh() {
     if (state == BeadState.spent) {
       state = BeadState.in_pool;
     }
   }
 
-  public boolean inHand(int round) //Checks to see if a bead if used this roud
-  {
-      return round == use && state == BeadState.in_pool;
+  // Checks to see if a bead if used this roud
+  public boolean inHand(int round) {
+    return round == use && state == BeadState.in_pool;
   }
 
-  public int getEffect() //1 = black bead, 2 = blue bead, 3 = green bead, anything else returns 4
-  {
+  //1 = black bead, 2 = blue bead, 3 = green bead, anything else returns 4
+  public int getEffect() {
     return state.ordinal() + 1;
   }
 
