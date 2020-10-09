@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class Bead {
 
-  public static final Bead BLACK = new Bead(BeadColor.BLACK, BeadEffect.FORCE);
-  public static final Bead GREEN = new Bead(BeadColor.GREEN, BeadEffect.SPEED);
-  public static final Bead BLUE = new Bead(BeadColor.BLUE, BeadEffect.INTELLECT);
-  public static final Bead WHITE = new Bead(BeadColor.WHITE, BeadEffect.ANCESTRY);
+  public static final Bead black = new Bead(BeadColor.black, BeadEffect.force);
+  public static final Bead green = new Bead(BeadColor.green, BeadEffect.speed);
+  public static final Bead blue = new Bead(BeadColor.blue, BeadEffect.intellect);
+  public static final Bead white = new Bead(BeadColor.white, BeadEffect.ancestry);
 
   private final BeadColor color;
   private final BeadEffect effect;
@@ -42,6 +42,6 @@ public class Bead {
 
   @Override
   public String toString() {
-    return "Bead{" + color + ":" + effect + "}";
+    return color.toString();
   }
 }

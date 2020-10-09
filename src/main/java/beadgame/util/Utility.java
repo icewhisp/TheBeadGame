@@ -1,15 +1,27 @@
 package beadgame.util;
 
 import java.util.Map;
+import java.util.Random;
+import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import beadgame.bead.Bead;
 
 public class Utility {
 
-  public static String stringify(Map<Bead, ?> map) {
-    return map.keySet().stream()
-        .map(bead -> bead.color() + "=" + map.get(bead))
-        .collect(Collectors.joining(", "));
+  private static final Random random = new Random();
+
+  public static <S, T> String stringify(
+      Map<S, T> map,
+      Function<S, String> keyDescription,
+      String joiner, Function<T, String> valueDescription) {
+    return map.entrySet().stream()
+        .map(entry ->
+            keyDescription.apply(entry.getKey())
+                + joiner
+                + valueDescription.apply(entry.getValue())
+        ).collect(Collectors.joining(", "));
+  }
+
+  public static int randomInt(int n) {
+    return random.nextInt(n);
   }
 }

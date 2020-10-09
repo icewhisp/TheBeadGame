@@ -17,9 +17,22 @@ public class Pool {
     this.contents = new TreeMap<>(Comparator.comparing(Bead::color));
   }
 
+  public static void move(Pool fromPool, Pool toPool) {
+    fromPool.contents.forEach((bead, count) -> {
+      for (int i = 0; i < count; i++) {
+        toPool.add(bead);
+      }
+    });
+    fromPool.contents.clear();
+  }
+
   @Override
   public String toString() {
-    return "Pool{" + type + ": " + Utility.stringify(contents) + '}';
+    return "Pool{" + type + ": " + contentDescription() + '}';
+  }
+
+  public String contentDescription() {
+    return Utility.stringify(contents, c -> c.color().toString(), "=", Object::toString);
   }
 
   public int count() {
@@ -43,7 +56,7 @@ public class Pool {
     int current = count(bead);
     if (current == 0) {
       throw new IllegalStateException(
-          "Cannot remove a bead if none fo that type si contained in the pool: " + this);
+          "Cannot remove a bead if none of that type is contained in the pool: " + this);
     } else if (current == 1) {
       contents.remove(bead);
     } else {
@@ -51,4 +64,40 @@ public class Pool {
     }
   }
 
+  public boolean hasBeads() {
+    return count() > 0;
+  }
+
+  public Pool addAll(Bead... beads) {
+    for (Bead bead : beads) {
+      add(bead);
+    }
+    return this;
+  }
+
+  public Pool removeAll(Bead... beads) {
+    for (Bead bead : beads) {
+      remove(bead);
+    }
+    return this;
+  }
+
+  public Bead randomBead() {
+    int n = count();
+    if (n == 0) {
+      throw new IllegalStateException("Pool has no beads");
+    }
+    int index = Utility.randomInt(n);
+    for (Bead bead : contents.keySet()) {
+      index -= contents.get(bead);
+      if (index <= 0) {
+        return bead;
+      }
+    }
+    throw new IllegalStateException("Should not have got to here");
+  }
+
+  public PoolType type() {
+    return type;
+  }
 }

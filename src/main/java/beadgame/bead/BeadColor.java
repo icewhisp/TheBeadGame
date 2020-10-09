@@ -1,5 +1,5 @@
 package beadgame.bead;
 
 public enum BeadColor {
-  BLACK, BLUE, GREEN, WHITE
+  black, blue, green, white
 }

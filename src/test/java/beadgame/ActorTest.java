@@ -12,16 +12,16 @@ class ActorTest {
 
   @Test
   void gives_the_right_name() {
-    Actor bob = new Actor("bob");
+    Actor2 bob = new Actor2("bob");
     assertEquals("bob{-|-|-|-|-}", bob.toString());
 
-    Actor pratik = new Actor("pratik", BeadColor.blue, BeadColor.green);
+    Actor2 pratik = new Actor2("pratik", BeadColor.blue, BeadColor.green);
     assertEquals("pratik{-|IS|-|-|-}", pratik.toString());
   }
 
   @Test
   void character_with_beads_can_prepare_and_then_act() {
-    Actor bob = new Actor("bob", BeadColor.black, BeadColor.blue);
+    Actor2 bob = new Actor2("bob", BeadColor.black, BeadColor.blue);
 
     Assertions.assertFalse(bob.canAct());  // Cannot act yet as not prepared
     Assertions.assertTrue(bob.canPrepare());  // Can prepare
@@ -35,7 +35,7 @@ class ActorTest {
 
   @Test
   void throws_an_error_if_we_make_a_bad_prepare_call() {
-    Actor bob = new Actor("bob", BeadColor.black, BeadColor.blue);
+    Actor2 bob = new Actor2("bob", BeadColor.black, BeadColor.blue);
 
     // Cannot prepare two blacks
     assertThrows(IllegalStateException.class,
@@ -46,9 +46,9 @@ class ActorTest {
 
   @Test
   void speeds_are_correct() {
-    Actor bob = new Actor("bob", BeadColor.black, BeadColor.green, BeadColor.green,
+    Actor2 bob = new Actor2("bob", BeadColor.black, BeadColor.green, BeadColor.green,
         BeadColor.green);
-    Actor billy = new Actor("billy", BeadColor.black, BeadColor.green, BeadColor.green,
+    Actor2 billy = new Actor2("billy", BeadColor.black, BeadColor.green, BeadColor.green,
         BeadColor.green);
 
     bob.prepare(BeadColor.black, BeadColor.green);
