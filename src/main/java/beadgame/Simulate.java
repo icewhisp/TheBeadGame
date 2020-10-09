@@ -52,7 +52,6 @@ public class Simulate {
         / replications;
     this.averageRounds = (double) IntStream.of(rounds).sum() / replications;
 
-
     return this;
   }
 
