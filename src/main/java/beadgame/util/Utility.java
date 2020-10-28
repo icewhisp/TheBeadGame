@@ -24,4 +24,8 @@ public class Utility {
   public static int randomInt(int n) {
     return random.nextInt(n);
   }
+
+  public static int d6() {
+    return 1 + random.nextInt(6);
+  }
 }

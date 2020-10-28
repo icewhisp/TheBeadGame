@@ -14,7 +14,7 @@
     <Root level="warn">
       <AppenderRef ref="console"/>
     </Root>
-    <Logger name="beadgame.combat.Combat" level="info" additivity="false">
+    <Logger name="beadgame.combat.Combat" level="warn" additivity="false">
       <AppenderRef ref="console"/>
     </Logger>
     <Logger name="beadgame.actor.Actor" level="warn" additivity="false">

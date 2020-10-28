@@ -11,14 +11,15 @@ class ActorTest {
 
   @Test
   void empty_pool_is_as_expected() {
-    Actor a = new Actor("Juan");
+    Actor a = new Actor("Juan", Strategy.preferMultipleDifferent(1));
     assertEquals("Juan{READY:[], ACTION:[], SPENT:[], EXHAUSTED:[], INJURY:[]}", a.toString());
     assertFalse(a.canPrepare());
   }
 
   @Test
   void starting_with_a_few_beads() {
-    Actor a = new Actor("Emily", Bead.black, Bead.black, Bead.blue, Bead.white);
+    Actor a = new Actor("Emily", Strategy.preferMultipleDifferent(1), Bead.black, Bead.black, Bead.blue,
+        Bead.white);
     assertEquals(
         "Emily{READY:[BLACK=2, BLUE=1, WHITE=1], ACTION:[], SPENT:[], EXHAUSTED:[], INJURY:[]}",
         a.toString());

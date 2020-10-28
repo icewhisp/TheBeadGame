@@ -21,6 +21,10 @@ public class Combat {
     this(new Team("A"), new Team("B"));
   }
 
+  public Combat copy() {
+    return new Combat(A.copy(), B.copy());
+  }
+
   public Combat(Team a, Team b) {
     A = a;
     B = b;
@@ -34,13 +38,21 @@ public class Combat {
   }
 
   public Combat addToSideA(Actor a) {
-    A.add(a);
-    return this;
+    if (A.contains(a) || B.contains(a)) {
+      throw new IllegalArgumentException("Cannot add the same actor twice");
+    } else {
+      A.add(a);
+      return this;
+    }
   }
 
   public Combat addToSideB(Actor b) {
-    B.add(b);
-    return this;
+    if (A.contains(b) || B.contains(b)) {
+      throw new IllegalArgumentException("Cannot add the same actor twice");
+    } else {
+      B.add(b);
+      return this;
+    }
   }
 
   public Team winningTeam() {
@@ -57,15 +69,12 @@ public class Combat {
     roundNumber++;
     logger.debug("round {} - preparation phase", roundNumber);
 
-    // Just pick a random bead for everyone
-    Stream.concat(A.actors().stream(), B.actors().stream())
+    A.actors().stream()
         .filter(Actor::canPrepare)
-        .forEach(this::chooseRandomly);
-  }
-
-  private void chooseRandomly(Actor actor) {
-    Bead bead = actor.readyPool().randomBead();
-    actor.prepare(bead);
+        .forEach(actor -> actor.prepare(B.actors()));
+    B.actors().stream()
+        .filter(Actor::canPrepare)
+        .forEach(actor -> actor.prepare(A.actors()));
   }
 
   public void refreshPhase() {

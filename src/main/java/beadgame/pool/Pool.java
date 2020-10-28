@@ -1,8 +1,12 @@
 package beadgame.pool;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import beadgame.bead.Bead;
 import beadgame.util.Utility;
@@ -68,19 +72,28 @@ public class Pool {
     return count() > 0;
   }
 
-  public Pool addAll(Bead... beads) {
+  public Pool addAll(Collection<Bead> beads) {
     for (Bead bead : beads) {
       add(bead);
     }
     return this;
   }
 
-  public Pool removeAll(Bead... beads) {
+  public Pool removeAll(Collection<Bead> beads) {
     for (Bead bead : beads) {
       remove(bead);
     }
     return this;
   }
+
+  public Pool addAll(Bead... beads) {
+    return addAll(Arrays.asList(beads));
+  }
+
+  public Pool removeAll(Bead... beads) {
+    return removeAll(Arrays.asList(beads));
+  }
+
 
   public Bead randomBead() {
     int n = count();
@@ -99,5 +112,12 @@ public class Pool {
 
   public PoolType type() {
     return type;
+  }
+
+  public Stream<Bead> beads() {
+    // Unwrap the map so each bead is replicated the correct amount of times
+    return contents.entrySet().stream().flatMap(
+        e -> IntStream.range(0, e.getValue()).mapToObj(i -> e.getKey())
+    );
   }
 }

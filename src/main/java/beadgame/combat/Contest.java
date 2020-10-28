@@ -8,11 +8,11 @@ import beadgame.bead.Bead;
 import beadgame.pool.Pool;
 import beadgame.util.Utility;
 
-public class Test {
+public class Contest {
 
   public static List<TestResult> closeAttack(Actor actor, Actor target, Pool beads) {
     int force = beads.count(Bead.black);
-    int intellect = beads.count(Bead.green);
+    int intellect = beads.count(Bead.blue);
 
     List<TestResult> results = new ArrayList<>();
     for (int i = 0; i < force + 1; i++) {
@@ -23,10 +23,10 @@ public class Test {
   }
 
   private static TestResult generalTest(int difficulty) {
-    int roll = Utility.randomInt(6);
+    int roll = Utility.d6();
     if (roll < difficulty) {
       return TestResult.fail;
-    } else if (roll == 6 && Utility.randomInt(6) >= difficulty) {
+    } else if (roll == 6 && Utility.d6() >= difficulty) {
       return TestResult.critical;
     } else {
       return TestResult.success;

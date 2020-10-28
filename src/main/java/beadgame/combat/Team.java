@@ -63,4 +63,10 @@ public class Team {
   public void fullHeal() {
     actors.forEach(Actor::fullHeal);
   }
+
+  public Team copy() {
+    Team team = new Team(name);
+    actors.forEach(a -> team.add(a.copy()));
+    return team;
+  }
 }
