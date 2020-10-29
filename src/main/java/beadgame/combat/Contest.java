@@ -24,6 +24,7 @@ public class Contest {
 
   private static TestResult generalTest(int difficulty) {
     int roll = Utility.d6();
+//    System.out.println("roll = " + roll + " vs. dc = " + difficulty);
     if (roll < difficulty) {
       return TestResult.fail;
     } else if (roll == 6 && Utility.d6() >= difficulty) {

@@ -119,8 +119,8 @@ public class Actor {
     logger.debug("{} is attacking {}", this, target);
 
     // Make the test
-    Pool.move(action, spent);
     List<TestResult> results = Contest.closeAttack(this, target, action);
+    Pool.move(action, spent);
 
     logger.debug("{} has attack results of {}", this, results);
 

@@ -2,13 +2,11 @@ package beadgame.combat;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import beadgame.actor.Actor;
-import beadgame.bead.Bead;
 
 public class Combat {
 
@@ -97,6 +95,7 @@ public class Combat {
     while (!toAct.isEmpty()) {
       Actor actor = toAct.stream().max(Comparator.comparingDouble(Actor::speedFactor)).get();
       toAct.remove(actor);
+      if (!actor.canAct()) continue;
       if (A.contains(actor)) {
         actor.performAction(A, B);
       } else {
