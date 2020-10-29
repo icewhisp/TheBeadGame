@@ -25,7 +25,7 @@ public class Utility {
     return random.nextInt(n);
   }
 
-  public static int d6() {
-    return 1 + random.nextInt(6);
+  public static int d6(int modifier) {
+    return 1 + random.nextInt(6) + modifier;
   }
 }

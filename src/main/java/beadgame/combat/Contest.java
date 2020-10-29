@@ -16,21 +16,24 @@ public class Contest {
 
     List<TestResult> results = new ArrayList<>();
     for (int i = 0; i < force + 1; i++) {
-      int dc = 4 - intellect;
-      results.add(generalTest(dc));
+      results.add(generalTest(intellect));
     }
     return results;
   }
 
-  private static TestResult generalTest(int difficulty) {
-    int roll = Utility.d6();
-//    System.out.println("roll = " + roll + " vs. dc = " + difficulty);
-    if (roll < difficulty) {
+  private static TestResult generalTest(int modifier) {
+    int DC = 5;
+    int critDC = 6;
+
+    int roll = Utility.d6(modifier) + modifier;
+    if (roll < DC) {
       return TestResult.fail;
-    } else if (roll == 6 && Utility.d6() >= difficulty) {
-      return TestResult.critical;
     } else {
-      return TestResult.success;
+      if (roll >= critDC && Utility.d6(modifier) >= DC) {
+        return TestResult.critical;
+      } else {
+        return TestResult.success;
+      }
     }
   }
 }

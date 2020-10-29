@@ -86,8 +86,8 @@ public class AnalyzeResults {
     int wins;
     int losses;
     double sumPercent;
-    int sumRoundsWin;
-    int sumRoundsLoss;
+    double sumRoundsWin;
+    double sumRoundsLoss;
 
     public void add(boolean wasWin, double winPercent, int averageRounds) {
       n++;
@@ -104,8 +104,8 @@ public class AnalyzeResults {
 
     @Override
     public String toString() {
-      int aWin = wins == 0 ? 0 : sumRoundsWin / wins;
-      int aLoss = losses == 0 ? 0 : sumRoundsLoss / losses;
+      int aWin = wins == 0 ? 0 : (int) Math.round(sumRoundsWin / wins);
+      int aLoss = losses == 0 ? 0 : (int) Math.round(sumRoundsLoss / losses);
       return String.format("%2.2f%% (%d/%d), average rounds (%d,%d)",
           sumPercent /n, wins, losses, aWin, aLoss);
     }

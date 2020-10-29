@@ -11,9 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import beadgame.bead.Bead;
+import beadgame.combat.Contest;
 import beadgame.combat.Damage;
 import beadgame.combat.Team;
-import beadgame.combat.Contest;
 import beadgame.combat.TestResult;
 import beadgame.pool.Pool;
 import beadgame.pool.PoolType;
@@ -124,15 +124,9 @@ public class Actor {
 
     logger.debug("{} has attack results of {}", this, results);
 
-    // Apply criticals first, then regular
     for (TestResult result : results) {
-      if (result == TestResult.critical) {
-        Damage.applyDamage(target, Damage::chooseBeadForCriticalDamage);
-      }
-    }
-    for (TestResult result : results) {
-      if (result == TestResult.success) {
-        Damage.applyDamage(target, Damage::chooseBeadForRegularDamage);
+      if (result != TestResult.fail) {
+        Damage.applyDamage(target, result);
       }
     }
 
